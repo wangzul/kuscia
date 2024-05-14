@@ -52,7 +52,8 @@ commands:
 
             if ! command -v go &> /dev/null; then
             wget "$GOLANG_URL"
-
+            apt-get update
+            apt-get install -y docker.io
             tar -C "$GOLANG_DIR" -xzf "go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
             echo 'export PATH=$PATH:/opt/go/bin' | tee -a ~/.bashrc
             echo 'export PATH=$PATH:/opt/go/bin' >> $BASH_ENV
