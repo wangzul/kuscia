@@ -51,7 +51,7 @@ commands:
             *) echo "Unsupported architecture"; exit 1;;
             esac
 
-            GOLANG_DIR="/usr/local"
+            GOLANG_DIR="/opt"
             GOLANG_VERSION="1.19.3"
             GOLANG_URL="https://golang.org/dl/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
 
@@ -86,7 +86,7 @@ commands:
             *) echo "Unsupported architecture"; exit 1;;
             esac
 
-            GOLANG_DIR="/usr/local"
+            GOLANG_DIR="/opt"
             GOLANG_VERSION="1.19.3"
             GOLANG_URL="https://golang.org/dl/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
 
