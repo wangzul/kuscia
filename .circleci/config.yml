@@ -60,12 +60,10 @@ commands:
             tar -C "$GOLANG_DIR" -xzf "go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
             echo 'export PATH=$PATH:/opt/go/bin' | tee -a ~/.bashrc
             echo 'export PATH=$PATH:/opt/go/bin' >> $BASH_ENV
-            source ~/.bashrc
             go --version
             go env
             echo 'export PATH=$PATH:$HOME/go/bin' | tee -a ~/.bashrc
             echo 'export PATH=$PATH:$HOME/go/bin' >> $BASH_ENV
-            source ~/.bashrc
             go get github.com/jstemmer/go-junit-report
             go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28.1 && \
             go install github.com/t-yuki/gocover-cobertura@latest && \
