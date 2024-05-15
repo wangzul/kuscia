@@ -85,15 +85,15 @@ commands:
             aarch64) ARCH="arm64";;
             *) echo "Unsupported architecture"; exit 1;;
             esac
-
+            apt-get update
+            yum install -y docker.io wget make cmake git curl unzip
             GOLANG_DIR="/opt"
             GOLANG_VERSION="1.22.2"
             GOLANG_URL="https://golang.org/dl/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
 
             if ! command -v go &> /dev/null; then
             wget "$GOLANG_URL"
-            apt-get update
-            yum install -y docker.io
+            
             tar -C "$GOLANG_DIR" -xzf "go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
             echo 'export PATH=$PATH:/opt/go/bin' | tee -a ~/.bashrc
             echo 'export PATH=$PATH:/opt/go/bin' >> $BASH_ENV
