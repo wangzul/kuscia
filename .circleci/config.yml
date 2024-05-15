@@ -167,21 +167,21 @@ workflows:
       - unit-test:
           matrix:
             parameters:
-              executor: [ "linux_aarch64_executor" ]
-#      - linux_build_kuscia:
-#          requires:
-#            - unit-test
-#          matrix:
-#            parameters:
-#              executor: [ "linux_x64_executor", "linux_aarch64_executor" ]
-#      - image_publish:
-#          requires:
-#            - linux_build_kuscia
-#          filters:
-#            branches:
-#              ignore: /.*/
-#            tags:
-#              only: /^v.*/
+              executor: [ "linux_x64_executor","linux_aarch64_executor" ]
+      - linux_build_kuscia:
+          requires:
+            - unit-test
+          matrix:
+            parameters:
+              executor: [ "linux_x64_executor", "linux_aarch64_executor" ]
+      - image_publish:
+          requires:
+            - linux_build_kuscia
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
   build-kuscia-deps-workflow:
     when:
       equal: [ "publish_kuscia_deps", << pipeline.parameters.GHA_Meta >> ]
