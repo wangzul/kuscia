@@ -60,6 +60,7 @@ commands:
             tar -C "$GOLANG_DIR" -xzf "go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
             echo 'export PATH=$PATH:/opt/go/bin' | tee -a ~/.bashrc
             echo 'export PATH=$PATH:/opt/go/bin' >> $BASH_ENV
+            source ~/.bashrc
             echo 'export PATH=$PATH:$HOME/go/bin' | tee -a ~/.bashrc
             echo 'export PATH=$PATH:$HOME/go/bin' >> $BASH_ENV
             source ~/.bashrc
