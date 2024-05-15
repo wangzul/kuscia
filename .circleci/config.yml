@@ -28,12 +28,12 @@ executors:
   linux_x64_executor: # declares a reusable executor
     docker:
       - image: secretflow/kuscia-ci:0.4
-    resource_class: 2xlarge
+    resource_class: large
     shell: /bin/bash --login -eo pipefail
   linux_aarch64_executor:
     docker:
       - image: secretflow/ubuntu-base-ci:latest
-    resource_class: arm.2xlarge
+    resource_class: arm.large
     shell: /bin/bash --login -eo pipefail
 
 commands:
@@ -58,11 +58,16 @@ commands:
             if ! command -v go &> /dev/null; then
             wget "$GOLANG_URL"
             tar -C "$GOLANG_DIR" -xzf "go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
-            echo 'export PATH=$PATH:/usr/local/go/bin' | tee -a ~/.bashrc
-            echo 'export PATH=$PATH:/usr/local/go/bin' >> $BASH_ENV
-            apt-get update
-            apt-get install -y docker.io
+            echo 'export PATH=$PATH:/opt/go/bin' | tee -a ~/.bashrc
+            echo 'export PATH=$PATH:/opt/go/bin' >> $BASH_ENV
+            echo 'export PATH=$PATH:$HOME/go/bin' | tee -a ~/.bashrc
+            echo 'export PATH=$PATH:$HOME/go/bin' >> $BASH_ENV
             source ~/.bashrc
+            go get github.com/jstemmer/go-junit-report
+            go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28.1 && \
+            go install github.com/t-yuki/gocover-cobertura@latest && \
+            go install github.com/jstemmer/go-junit-report/v2@latest && \
+            go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
             fi
       - run:
           name: Test Kuscia
@@ -87,8 +92,8 @@ commands:
             if ! command -v go &> /dev/null; then
             wget "$GOLANG_URL"
             tar -C "$GOLANG_DIR" -xzf "go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
-            echo 'export PATH=$PATH:/usr/local/go/bin' | tee -a ~/.bashrc
-            echo 'export PATH=$PATH:/usr/local/go/bin' >> $BASH_ENV
+            echo 'export PATH=$PATH:/opt/go/bin' | tee -a ~/.bashrc
+            echo 'export PATH=$PATH:/opt/go/bin' >> $BASH_ENV
             source ~/.bashrc
             fi
       - run:
