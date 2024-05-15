@@ -86,7 +86,6 @@ commands:
             aarch64) ARCH="arm64";;
             *) echo "Unsupported architecture"; exit 1;;
             esac
-            yum update -y
             yum install -y docker.io wget make cmake git curl unzip
             GOLANG_DIR="/opt"
             GOLANG_VERSION="1.22.2"
