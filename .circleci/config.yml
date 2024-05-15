@@ -32,7 +32,7 @@ executors:
     shell: /bin/bash --login -eo pipefail
   linux_aarch64_executor:
     docker:
-      - image: secretflow/ubuntu-base-ci:latest
+      - image: openanolis/anolisos:8.8
     resource_class: arm.large
     shell: /bin/bash --login -eo pipefail
 
@@ -64,7 +64,7 @@ commands:
             echo 'export PATH=$PATH:$HOME/go/bin' | tee -a ~/.bashrc
             echo 'export PATH=$PATH:$HOME/go/bin' >> $BASH_ENV
             source ~/.bashrc
-            /usr/local/go/bin/go get github.com/jstemmer/go-junit-report
+            /usr/local/go/bin/go get github.com/jstemmer/ln -sf /usr/bin/bash /bin/sh
             /usr/local/go/bin/go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28.1 && \
             /usr/local/go/bin/go install github.com/t-yuki/gocover-cobertura@latest && \
             /usr/local/go/bin/go install github.com/jstemmer/go-junit-report/v2@latest && \
