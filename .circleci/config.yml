@@ -44,26 +44,26 @@ commands:
       - run:
           name: "install go"
           command: |
-            ARCH=$(uname -m)
+           ARCH=$(uname -m)
             case "$ARCH" in
             x86_64) ARCH="amd64";;
             aarch64) ARCH="arm64";;
             *) echo "Unsupported architecture"; exit 1;;
             esac
 
-            GOLANG_DIR="/opt"
-            GOLANG_VERSION="1.19.3"
+            GOLANG_DIR="/usr/local"
+            GOLANG_VERSION="1.22.2"
             GOLANG_URL="https://golang.org/dl/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
 
             if ! command -v go &> /dev/null; then
             wget "$GOLANG_URL"
             tar -C "$GOLANG_DIR" -xzf "go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
-            echo 'export PATH=$PATH:/opt/go/bin' | tee -a ~/.bashrc
-            echo 'export PATH=$PATH:/opt/go/bin' >> $BASH_ENV
-            go --version
-            go env
+            echo 'export PATH=$PATH:/usr/local/go/bin' | tee -a ~/.bashrc
+            echo 'export PATH=$PATH:/usr/local/go/bin' >> $BASH_ENV
+            source ~/.bashrc
             echo 'export PATH=$PATH:$HOME/go/bin' | tee -a ~/.bashrc
             echo 'export PATH=$PATH:$HOME/go/bin' >> $BASH_ENV
+            source ~/.bashrc
             go get github.com/jstemmer/go-junit-report
             go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28.1 && \
             go install github.com/t-yuki/gocover-cobertura@latest && \
@@ -87,11 +87,13 @@ commands:
             esac
 
             GOLANG_DIR="/opt"
-            GOLANG_VERSION="1.19.3"
+            GOLANG_VERSION="1.22.2"
             GOLANG_URL="https://golang.org/dl/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
 
             if ! command -v go &> /dev/null; then
             wget "$GOLANG_URL"
+            apt-get update
+            apt-get install -y docker.io
             tar -C "$GOLANG_DIR" -xzf "go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
             echo 'export PATH=$PATH:/opt/go/bin' | tee -a ~/.bashrc
             echo 'export PATH=$PATH:/opt/go/bin' >> $BASH_ENV
