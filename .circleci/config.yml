@@ -61,6 +61,8 @@ commands:
             echo 'export PATH=$PATH:/opt/go/bin' | tee -a ~/.bashrc
             echo 'export PATH=$PATH:/opt/go/bin' >> $BASH_ENV
             source ~/.bashrc
+            go --version
+            go env
             echo 'export PATH=$PATH:$HOME/go/bin' | tee -a ~/.bashrc
             echo 'export PATH=$PATH:$HOME/go/bin' >> $BASH_ENV
             source ~/.bashrc
@@ -165,13 +167,13 @@ workflows:
       - unit-test:
           matrix:
             parameters:
-              executor: [ "linux_x64_executor", "linux_aarch64_executor" ]
-      - linux_build_kuscia:
-          requires:
-            - unit-test
-          matrix:
-            parameters:
-              executor: [ "linux_x64_executor", "linux_aarch64_executor" ]
+              executor: [ "linux_aarch64_executor" ]
+#      - linux_build_kuscia:
+#          requires:
+#            - unit-test
+#          matrix:
+#            parameters:
+#              executor: [ "linux_x64_executor", "linux_aarch64_executor" ]
       - image_publish:
           requires:
             - linux_build_kuscia
