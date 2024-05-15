@@ -50,7 +50,7 @@ commands:
             *) echo "Unsupported architecture"; exit 1;;
             esac
             
-            yum install -y yum-utils docker-ce-cli containerd.io wget make cmake git curl unzip
+            yum install -y  wget make cmake git curl unzip
             GOLANG_DIR="/usr/local"
             GOLANG_VERSION="1.22.2"
             GOLANG_URL="https://golang.org/dl/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
@@ -84,7 +84,7 @@ commands:
             aarch64) ARCH="arm64";;
             *) echo "Unsupported architecture"; exit 1;;
             esac
-            yum install -y yum-utils docker-ce-cli containerd.io wget make cmake git curl unzip
+            yum install -y wget make cmake git curl unzip
             GOLANG_DIR="/opt"
             GOLANG_VERSION="1.22.2"
             GOLANG_URL="https://golang.org/dl/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
