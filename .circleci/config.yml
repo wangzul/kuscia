@@ -51,8 +51,8 @@ commands:
             ln -sf /usr/bin/bash /bin/sh
             yum install -y  wget make cmake git curl unzip gcc perl-IPC-Cmd
             GOLANG_DIR="/usr/local"
-            GOLANG_VERSION="1.22.2"
-            GOLANG_URL="https://golang.org/dl/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
+            GOLANG_VERSION="1.22.3"
+            GOLANG_URL="https://golang.google.cn/dl/go${GOLANG_VERSION}.linux-${ARCH}.tar.gz"
 
             if ! command -v go &> /dev/null; then
             wget "$GOLANG_URL"
