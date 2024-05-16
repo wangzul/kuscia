@@ -44,12 +44,12 @@ commands:
       - run:
           name: "install go"
           command: |
-           ARCH=$(uname -m)
-            case "$ARCH" in
-            aarch64) ARCH="arm64";;
-            *) echo "Unsupported architecture"; exit 1;;
-            esac
+            ARCH=$(uname -m)
             
+            if [ "$ARCH" == "aarch64" ]; then
+            echo 'export TZ=Asia/Shanghai' | tee -a ~/.bashrc
+            echo 'export TZ=Asia/Shanghai' | >> $BASH_ENV
+            source ~/.bashrc
             yum install -y  wget make cmake git curl unzip
             GOLANG_DIR="/usr/local"
             GOLANG_VERSION="1.22.2"
@@ -63,6 +63,7 @@ commands:
             source ~/.bashrc
             echo 'export PATH=$PATH:$HOME/go/bin' | tee -a ~/.bashrc
             echo 'export PATH=$PATH:$HOME/go/bin' >> $BASH_ENV
+            
             source ~/.bashrc
             /usr/local/go/bin/go get github.com/jstemmer/go-junit-report
             /usr/local/go/bin/go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28.1 && \
