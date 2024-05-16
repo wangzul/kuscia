@@ -49,6 +49,7 @@ commands:
             if [ "$ARCH" == "aarch64" ]; then
             ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai > /etc/timezone
             ln -sf /usr/bin/bash /bin/sh
+            yum update -y
             yum install -y  wget make cmake git curl unzip gcc perl-IPC-Cmd
             GOLANG_DIR="/usr/local"
             GOLANG_VERSION="1.22.3"
