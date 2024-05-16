@@ -71,6 +71,7 @@ commands:
             /usr/local/go/bin/go install github.com/jstemmer/go-junit-report/v2@latest && \
             /usr/local/go/bin/go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
             fi
+            fi
       - run:
           name: Test Kuscia
           command: make test
